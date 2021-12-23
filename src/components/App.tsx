@@ -1,9 +1,9 @@
-function App() {
+import MainCanvas from './MainCanvas'
+
+export default function App() {
   return (
     <div className="App">
-      Hello World
+      <MainCanvas />
     </div>
   )
 }
-
-export default App
