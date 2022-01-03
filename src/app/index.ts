@@ -1,3 +1,7 @@
+import Game from "./engine/Game";
+
+const game = new Game();
+
 export function init(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d");
   if (!ctx) {
