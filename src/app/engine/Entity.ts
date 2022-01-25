@@ -1,8 +1,16 @@
-interface IEntityLoopOptions {
+import Game from "./Game";
+
+type TEntityCommonOptions = {
+  game: Game;
+  ctx: CanvasRenderingContext2D;
   frames: number;
-}
+};
+
+type TEntitySetupOptions = TEntityCommonOptions & {};
+
+type TEntityLoopOptions = TEntityCommonOptions & {};
 
 export default class Entity {
-  setup() {}
-  loop(_: Partial<IEntityLoopOptions>) {}
+  setup(_: TEntitySetupOptions) {}
+  loop(_: TEntityLoopOptions) {}
 }

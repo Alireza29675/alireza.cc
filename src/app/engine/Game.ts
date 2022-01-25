@@ -3,9 +3,37 @@ import Entity from "./Entity";
 export default class Game {
   public frames: number = 0;
 
+  private canvas: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
   private started: boolean = false;
   private entities: Entity[] = [];
   private queueTasks: Array<() => void> = [];
+
+  constructor({ canvas }: { canvas: HTMLCanvasElement }) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  }
+
+  private get commonOptions() {
+    return {
+      game: this,
+      canvas: this.canvas,
+      ctx: this.ctx,
+      frames: this.frames,
+    };
+  }
+
+  private get setupOptions() {
+    return {
+      ...this.commonOptions,
+    };
+  }
+
+  private get loopOptions() {
+    return {
+      ...this.commonOptions,
+    };
+  }
 
   start() {
     this.started = true;
@@ -31,7 +59,7 @@ export default class Game {
   register(entity: Entity) {
     this.entities.push(entity);
     this.runOrQueue(() => {
-      entity.setup();
+      entity.setup(this.setupOptions);
     });
   }
   unregister(entity: Entity) {
@@ -48,9 +76,7 @@ export default class Game {
 
     // Iterate through the entities loop
     for (const entity of this.entities) {
-      entity.loop({
-        frames: this.frames,
-      });
+      entity.loop(this.loopOptions);
     }
 
     requestAnimationFrame(this.loop.bind(this));
