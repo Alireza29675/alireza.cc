@@ -1,4 +1,5 @@
 import draw from "./draw";
+import "./utils/mouse";
 
 const instantiatedCanvases: HTMLCanvasElement[] = [];
 
