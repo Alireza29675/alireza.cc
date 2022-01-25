@@ -6,6 +6,11 @@ export const PIXELS_GAP = 2;
 
 const buffer = new ArrayBuffer(PIXELS_WIDTH * PIXELS_HEIGHT);
 const pixels = new Uint8Array(buffer);
+const shadow = new Uint8Array(buffer);
+
+export function resetShadow() {
+  pixels.forEach((_, i) => (shadow[i] = pixels[i]));
+}
 
 export function getPixelSize() {
   const { width, height } = screen;
@@ -24,10 +29,18 @@ export function getPixelIndex(x: number, y: number) {
   return y * PIXELS_WIDTH + x;
 }
 
-export function getPixelColor(x: number, y: number) {
+export function getPermanentPixelColor(x: number, y: number) {
   return pixels[getPixelIndex(x, y)];
 }
 
-export function setPixel(x: number, y: number, value: number) {
+export function getPixelColor(x: number, y: number) {
+  return shadow[getPixelIndex(x, y)];
+}
+
+export function setPermanentPixel(x: number, y: number, value: number) {
   pixels[getPixelIndex(x, y)] = value;
+}
+
+export function setPixel(x: number, y: number, value: number) {
+  shadow[getPixelIndex(x, y)] = value;
 }
