@@ -9,7 +9,9 @@ const pixels = new Uint8Array(buffer);
 
 export function getPixelSize() {
   const { width, height } = screen;
-  const heightIsFitting = height < width;
+  const ratio = PIXELS_WIDTH / PIXELS_HEIGHT;
+
+  const heightIsFitting = height < width / ratio;
 
   const fittingSide = heightIsFitting ? height : width;
   const fittingPixels = heightIsFitting ? PIXELS_HEIGHT : PIXELS_WIDTH;

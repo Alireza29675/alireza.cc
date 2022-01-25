@@ -1,6 +1,6 @@
 export type TDraw = (
   ctx: CanvasRenderingContext2D,
-  options: {
+  options?: {
     frames: number;
   }
 ) => void;
