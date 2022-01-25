@@ -24,7 +24,7 @@ export function getPixelIndex(x: number, y: number) {
   return y * PIXELS_WIDTH + x;
 }
 
-export function getPixel(x: number, y: number) {
+export function getPixelColor(x: number, y: number) {
   return pixels[getPixelIndex(x, y)];
 }
 
