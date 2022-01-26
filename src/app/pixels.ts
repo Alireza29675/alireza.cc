@@ -1,6 +1,6 @@
 import screen from "./utils/screen";
 
-export const PIXELS_WIDTH = 60;
+export const PIXELS_WIDTH = 90;
 export const PIXELS_HEIGHT = 40;
 export const PIXELS_GAP = 2;
 
@@ -11,7 +11,7 @@ const pixels = new Uint8Array(buffer);
 const shadow = new Uint8Array(buffer);
 
 export function resetShadow() {
-  pixels.forEach((v, i) => (shadow[i] = 22));
+  pixels.forEach((v, i) => (shadow[i] = 20));
 }
 
 export const getPixelSize = (() => {

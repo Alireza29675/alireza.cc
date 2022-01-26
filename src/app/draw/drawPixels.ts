@@ -17,7 +17,7 @@ const drawPixels: TDraw = (ctx) => {
       const offsetX = screen.width / 2 - (PIXELS_WIDTH * sizeWithGap) / 2;
       const offsetY = screen.height / 2 - (PIXELS_HEIGHT * sizeWithGap) / 2;
 
-      const color = getPixelColor(x, y);
+      const color = Math.floor(getPixelColor(x, y));
       ctx.fillStyle = `rgb(${color}, ${color}, ${color})`;
       ctx.fillRect(
         sizeWithGap * x + offsetX,
