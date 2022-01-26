@@ -1,17 +1,26 @@
 import screen from "./utils/screen";
 
-export const PIXELS_WIDTH = 90;
+export const PIXELS_WIDTH = 60;
 export const PIXELS_HEIGHT = 40;
 export const PIXELS_GAP = 2;
 
 const MAX_INDEX = PIXELS_WIDTH * PIXELS_HEIGHT;
 
 const buffer = new ArrayBuffer(MAX_INDEX);
-const pixels = new Uint8Array(buffer);
-const shadow = new Uint8Array(buffer);
+const shadowBuffer = new ArrayBuffer(MAX_INDEX);
+const pixels = new Uint8Array(buffer).fill(20);
+const shadow = new Uint8Array(shadowBuffer);
+
+type TValueFunction = (value: number, shadowValue: number) => number;
+
+export function clearScreen() {
+  pixels.fill(20);
+}
 
 export function resetShadow() {
-  pixels.forEach((v, i) => (shadow[i] = 20));
+  shadow.forEach((_, i) => {
+    shadow[i] = pixels[i];
+  });
 }
 
 export const getPixelSize = (() => {
@@ -51,16 +60,29 @@ export function getPixelColor(x: number, y: number) {
   return shadow[getPixelIndex(x, y)];
 }
 
-export function setPermanentPixel(x: number, y: number, value: number) {
-  value = Math.max(0, Math.min(255, value));
+export function setPermanentPixel(
+  x: number,
+  y: number,
+  value: number | TValueFunction
+) {
+  if (typeof value === "function") {
+    value = value(getPermanentPixelColor(x, y), getPixelColor(x, y));
+  } else {
+    value = Math.max(0, Math.min(255, value));
+  }
+
   if (x < 0 || x >= PIXELS_WIDTH || y < 0 || y >= PIXELS_HEIGHT) {
     return;
   }
   pixels[getPixelIndex(x, y)] = value;
 }
 
-export function setPixel(x: number, y: number, value: number) {
-  value = Math.max(0, Math.min(255, value));
+export function setPixel(x: number, y: number, value: number | TValueFunction) {
+  if (typeof value === "function") {
+    value = value(getPermanentPixelColor(x, y), getPixelColor(x, y));
+  } else {
+    value = Math.max(0, Math.min(255, value));
+  }
   if (x < 0 || x >= PIXELS_WIDTH || y < 0 || y >= PIXELS_HEIGHT) {
     return;
   }
