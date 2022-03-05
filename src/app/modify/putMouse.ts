@@ -3,7 +3,7 @@ import { setPixel, getPixelColor } from "../pixels";
 
 const previous: { x: number; y: number }[] = [];
 
-const FADING_TAIL = true;
+const FADING_TAIL = false;
 const TAIL_LENGTH = 10;
 
 export default function putMouse() {
