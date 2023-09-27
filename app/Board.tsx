@@ -1,6 +1,8 @@
+'use client'
+
 const MIRO_BOARD_ADDRESS = "https://miro.com/app/board/uXjVMzzwMt8=/?share_link_id=875082594130"
 
-export default function App() {
+export default function Board() {
   return (
     <div className="App">
       <iframe
