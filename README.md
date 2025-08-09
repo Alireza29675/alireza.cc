@@ -21,7 +21,3 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 - [Styled-components](https://styled-components.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## Keywords
-
-Miro, online collaboration, software engineering, generative art, creative coding, portfolio, Amsterdam
-
